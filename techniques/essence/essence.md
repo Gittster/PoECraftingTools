@@ -51,6 +51,8 @@ Essences cannot be used on an item with a meta-crafted mod, like Prefixes Cannot
 - Not usable on unique items.
 - Blocked entirely by meta-crafted mods.
 
+See the [essence guaranteed modifiers table](essence-modifiers.md) for what each essence guarantees per item class.
+
 ## Data completeness
 
 Core mechanic, tier caps, and meta-mod block verified against the PoE Wiki Essence page (fetched 2026-07-30). The corrupted-only family's "guarantees a unique modifier" behavior is per your description, not independently wiki-verified yet.

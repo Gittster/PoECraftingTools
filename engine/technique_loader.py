@@ -11,6 +11,12 @@ from models import Preconditions, Technique
 
 FRONTMATTER_DELIM = "---"
 
+# Presence of these frontmatter keys is what distinguishes a technique file
+# from other markdown pages under techniques/ (reference/data pages like
+# essence-modifiers.md, or site pages like index.md/tags.md, which have
+# their own, much smaller frontmatter or none at all).
+REQUIRED_KEYS = {"id", "name", "category", "action", "guarantee", "destructive", "cost_tier"}
+
 
 def _split_frontmatter(text: str) -> tuple[dict, str]:
     lines = text.splitlines()
@@ -58,8 +64,14 @@ def load_technique(path: str) -> Technique:
 def load_all_techniques(root: str | None = None) -> list[Technique]:
     if root is None:
         root = os.path.join(os.path.dirname(__file__), "..", "techniques")
-    # Only category subdirectories (techniques/<category>/*.md) hold technique
-    # files. Top-level pages like index.md/tags.md are site content, not
-    # techniques, and don't have technique frontmatter.
+    # Category subdirectories (techniques/<category>/*.md) can hold both
+    # technique files and other pages (reference tables, data visualizations).
+    # Only files whose frontmatter has the full technique schema get loaded.
     paths = sorted(glob.glob(os.path.join(root, "*", "*.md")))
-    return [load_technique(p) for p in paths]
+    techniques = []
+    for path in paths:
+        with open(path, encoding="utf-8") as f:
+            fm, _ = _split_frontmatter(f.read())
+        if REQUIRED_KEYS.issubset(fm.keys()):
+            techniques.append(load_technique(path))
+    return techniques
