@@ -16,7 +16,7 @@ cost_tier: medium
 inputs:
   - "Harvest Lifeforce (type/amount matching the chosen tag)"
 see_also:
-  - essence-reforge-rare
+  - essence
   - fossil-weighted-reforge
   - harvest-remove-add
 tags:
