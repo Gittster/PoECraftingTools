@@ -1,0 +1,41 @@
+site_name: PoE Crafting Techniques
+site_description: A tagged, searchable repository of Path of Exile crafting techniques.
+repo_url: https://github.com/Gittster/PoECraftingTools
+repo_name: Gittster/PoECraftingTools
+edit_uri: edit/main/techniques/
+
+docs_dir: techniques
+site_dir: _site
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.action.edit
+
+plugins:
+  - search
+  - tags
+
+markdown_extensions:
+  - tables
+  - admonition
+  - toc:
+      permalink: true

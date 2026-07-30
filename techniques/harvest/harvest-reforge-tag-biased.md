@@ -19,7 +19,15 @@ see_also:
   - essence-guaranteed-mod-reroll
   - fossil-weighted-reforge
   - harvest-remove-add
+tags:
+  - harvest
+  - action:reforge
+  - guarantee:guaranteed
+  - destructive:reroll_all
+  - cost:medium
 ---
+
+# Harvest: Reforge with Guaranteed Tag
 
 ## What it does
 

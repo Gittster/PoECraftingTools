@@ -18,7 +18,15 @@ inputs:
 see_also:
   - harvest-augment-add-mod
   - harvest-reforge-tag-biased
+tags:
+  - harvest
+  - action:remove_add
+  - guarantee:guaranteed
+  - destructive:remove_one
+  - cost:medium
 ---
+
+# Harvest: Remove a Random Mod, Add a New Tagged Mod
 
 ## What it does
 

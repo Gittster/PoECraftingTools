@@ -19,7 +19,15 @@ inputs:
 see_also:
   - essence-guaranteed-mod-reroll
   - harvest-reforge-tag-biased
+tags:
+  - fossil
+  - action:reroll_all
+  - guarantee:biased
+  - destructive:reroll_all
+  - cost:medium
 ---
+
+# Fossil: Weighted Reforge
 
 ## What it does
 

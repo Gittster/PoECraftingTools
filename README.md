@@ -97,6 +97,22 @@ community-reverse-engineered sources instead:
 - **[Path of Exile Wiki](https://www.poewiki.net/)** — documents the actual
   mechanics/formulas for harvest, essences, fossils, and eldritch currency.
 
+## Docs site (GitHub Pages)
+
+`techniques/` doubles as a browsable, searchable [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) site — full-text search plus a tag index (category, action type, guarantee strength, cost) built straight from each technique's frontmatter, no separate content to maintain.
+
+`.github/workflows/deploy-docs.yml` builds and deploys it to GitHub Pages automatically on every push. One-time setup: in the repo's **Settings → Pages**, set **Build and deployment → Source** to **GitHub Actions**. After that, the site publishes at `https://gittster.github.io/PoECraftingTools/`.
+
+To preview locally:
+
+```
+pip install -r requirements-docs.txt
+mkdocs serve   # live-reloading preview at http://127.0.0.1:8000
+mkdocs build --strict   # matches what CI runs
+```
+
+The reverse-crafting engine (`engine/`) is not wired into the site yet — it runs locally via Python only (see below). Making the recommender interactive in-browser would mean porting `reverse_craft.py` to JavaScript (or running it via Pyodide); that's a natural Phase 3 follow-up, not yet built.
+
 ## Running the demo
 
 ```

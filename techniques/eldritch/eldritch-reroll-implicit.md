@@ -18,7 +18,17 @@ inputs:
   - "Eldritch Ember (Eater of Worlds, any tier)"
 see_also:
   - harvest-augment-add-mod
+tags:
+  - eldritch
+  - action:reroll_implicit
+  - guarantee:biased
+  - destructive:none
+  - cost:medium
+  - targets:eldritch_exarch
+  - targets:eldritch_eater
 ---
+
+# Eldritch Currency: Reroll Eldritch Implicit
 
 ## What it does
 
