@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Crafting Technique",
+  "description": "Frontmatter schema for a single technique file under techniques/<category>/<id>.md. This is the structured half of the file; the markdown body below the frontmatter is the human-readable explanation and is not validated here.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "category",
+    "action",
+    "affects",
+    "mod_pool_tags",
+    "guarantee",
+    "destructive",
+    "preconditions",
+    "cost_tier"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique slug, matches the filename without extension.",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Short human-readable name shown in docs/search results."
+    },
+    "category": {
+      "type": "string",
+      "description": "Top-level currency/system this technique belongs to.",
+      "enum": ["essence", "fossil", "harvest", "eldritch"]
+    },
+    "action": {
+      "type": "string",
+      "description": "What kind of transformation this technique performs on an item.",
+      "enum": [
+        "reroll_all",
+        "add_mod",
+        "remove_mod",
+        "remove_add",
+        "reroll_implicit",
+        "reforge"
+      ]
+    },
+    "affects": {
+      "type": "array",
+      "description": "Which mod slot types this technique can place outcomes into or remove from.",
+      "items": { "enum": ["prefix", "suffix", "implicit"] },
+      "minItems": 1
+    },
+    "mod_pool_tags": {
+      "type": "array",
+      "description": "Mod tags this technique can guarantee, bias toward, or restrict to (e.g. life, energy_shield, resistance, speed). Use [\"any\"] if the technique does not restrict by tag.",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "guarantee": {
+      "type": "string",
+      "description": "How certain the tagged outcome is: 'guaranteed' (always get a mod matching mod_pool_tags), 'biased' (weighted toward it but not certain), or 'none' (fully random, mod_pool_tags is empty/any).",
+      "enum": ["guaranteed", "biased", "none"]
+    },
+    "destructive": {
+      "type": "string",
+      "description": "How much of the item's existing mod state this technique disturbs. 'none' only adds into an open slot. 'remove_one' removes exactly one existing mod (random or tag-targeted). 'reroll_all' clears and rerolls every mod at the item's rarity.",
+      "enum": ["none", "remove_one", "reroll_all"]
+    },
+    "preconditions": {
+      "type": "object",
+      "description": "Requirements the item must meet before this technique can be applied.",
+      "required": ["rarity"],
+      "properties": {
+        "rarity": {
+          "type": "array",
+          "items": { "enum": ["normal", "magic", "rare"] },
+          "minItems": 1
+        },
+        "influence": {
+          "type": "array",
+          "description": "Influence tag(s) the item must already have, if any (item needs at least one of these, i.e. OR semantics). Empty array = no influence required.",
+          "items": { "type": "string" }
+        },
+        "requires_open_affix": {
+          "type": "boolean",
+          "description": "True if this technique needs an unused prefix or suffix slot to succeed (e.g. harvest augment)."
+        },
+        "requires_existing_mod_tag": {
+          "type": "array",
+          "description": "Tags that must already be present on the item for this technique to make sense (e.g. eldritch reroll requires an existing eldritch implicit).",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "cost_tier": {
+      "type": "string",
+      "description": "Rough relative currency cost, for ranking before real price data is wired in.",
+      "enum": ["low", "medium", "high"]
+    },
+    "inputs": {
+      "type": "array",
+      "description": "The actual currency/items consumed, for display purposes.",
+      "items": { "type": "string" }
+    },
+    "see_also": {
+      "type": "array",
+      "description": "IDs of related or complementary techniques.",
+      "items": { "type": "string" }
+    }
+  }
+}
