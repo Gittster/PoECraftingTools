@@ -11,6 +11,8 @@ Mod names below are cleaned-up internal mod ids, not exact in-game wording. Trea
 <div id="essence-table-app">
   <label for="item-class-select">Item class:</label>
   <select id="item-class-select"></select>
+  <label for="essence-search">Filter:</label>
+  <input type="text" id="essence-search" placeholder="type to filter by essence or modifier">
   <table id="essence-table">
     <thead>
       <tr>
@@ -31,6 +33,7 @@ Mod names below are cleaned-up internal mod ids, not exact in-game wording. Trea
     .then(function (res) { return res.json(); })
     .then(function (essences) {
       var select = document.getElementById("item-class-select");
+      var search = document.getElementById("essence-search");
       var body = document.getElementById("essence-table-body");
 
       var itemClasses = new Set();
@@ -46,9 +49,17 @@ Mod names below are cleaned-up internal mod ids, not exact in-game wording. Trea
         select.appendChild(opt);
       });
 
-      function render(itemClass) {
+      function render() {
+        var itemClass = select.value;
+        var term = search.value.trim().toLowerCase();
         body.innerHTML = "";
         var rows = essences.filter(function (e) { return itemClass in e.mods; });
+        if (term) {
+          rows = rows.filter(function (e) {
+            return e.name.toLowerCase().indexOf(term) !== -1 ||
+              e.mods[itemClass].toLowerCase().indexOf(term) !== -1;
+          });
+        }
         function familyOf(name) {
           var idx = name.indexOf(" of ");
           return idx === -1 ? name : name.slice(idx + 4);
@@ -74,11 +85,10 @@ Mod names below are cleaned-up internal mod ids, not exact in-game wording. Trea
 
       var defaultClass = sortedClasses.includes("Boots") ? "Boots" : sortedClasses[0];
       select.value = defaultClass;
-      render(defaultClass);
+      render();
 
-      select.addEventListener("change", function () {
-        render(select.value);
-      });
+      select.addEventListener("change", render);
+      search.addEventListener("input", render);
     });
 })();
 </script>
