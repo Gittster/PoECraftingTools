@@ -17,7 +17,7 @@ inputs:
   - "Resonator (Primitive/Potent/Prime/Powerful, matching socket count to fossils used)"
   - "1-4 Fossils (e.g. Pristine, Dense, Serrated, ...)"
 see_also:
-  - essence-guaranteed-mod-reroll
+  - essence-reforge-rare
   - harvest-reforge-tag-biased
 tags:
   - fossil

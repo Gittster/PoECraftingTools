@@ -58,5 +58,8 @@ def load_technique(path: str) -> Technique:
 def load_all_techniques(root: str | None = None) -> list[Technique]:
     if root is None:
         root = os.path.join(os.path.dirname(__file__), "..", "techniques")
-    paths = sorted(glob.glob(os.path.join(root, "**", "*.md"), recursive=True))
+    # Only category subdirectories (techniques/<category>/*.md) hold technique
+    # files. Top-level pages like index.md/tags.md are site content, not
+    # techniques, and don't have technique frontmatter.
+    paths = sorted(glob.glob(os.path.join(root, "*", "*.md")))
     return [load_technique(p) for p in paths]

@@ -6,7 +6,9 @@ This isn't just a data dump: every entry explains the mechanic in plain language
 
 ## Categories
 
-- **[Essence](essence/essence-guaranteed-mod-reroll.md)** — guarantee one specific modifier while rerolling everything else.
+- **Essence** — guarantee one specific modifier while rerolling everything else:
+  - [Upgrade a normal item to rare](essence/essence-upgrade-normal-to-rare.md) (any tier)
+  - [Reforge an existing rare](essence/essence-reforge-rare.md) (tier 5+ only)
 - **[Fossil](fossil/fossil-weighted-reforge.md)** — reroll everything with weights biased toward (or away from) chosen mod themes.
 - **Harvest** — the most surgical tools available:
   - [Reforge with a guaranteed tag](harvest/harvest-reforge-tag-biased.md)
